@@ -4,7 +4,8 @@ const fs = require('fs');
 //const qs = require('querystring');
 
 const hostname = '127.0.0.1';
-const port = 3000;
+//const port = 3000;
+const port = process.env.port || 3000;
 
 const server = http.createServer((req, res) => {
   var filePath = '.' + req.url;
