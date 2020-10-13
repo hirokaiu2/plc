@@ -1,0 +1,68 @@
+------------------------------- MODULE plc -------------------------------
+EXTENDS Naturals, TLC
+
+(* --algorithm plc
+variables 0_startButton = FALSE, 1_wpPresent = FALSE, 2_fwLimit = FALSE, 3_bwLimit = FALSE, 4_openComplete = FALSE,
+          5_opLamp = FALSE, 6_moveFw = FALSE, 7_moveBw = FALSE, 8_pushFw = FALSE, 9_pushBw = FALSE,
+          plc_state = 0, state = 0;
+
+fair process plc = 1
+begin
+PLC_LOOP:
+while TRUE do
+  if plc_state = 0 then
+    either
+      0_startButton := FALSE; 1_wpPresent := FALSE; 2_fwLimit := FALSE; 3_bwLimit := TRUE; 4_openComplete := TRUE; 
+      or 0_startButton := TRUE; 1_wpPresent := FALSE; 2_fwLimit := FALSE; 3_bwLimit := TRUE; 4_openComplete := TRUE; 
+      or 0_startButton := FALSE; 1_wpPresent := FALSE; 2_fwLimit := FALSE; 3_bwLimit := TRUE; 4_openComplete := TRUE; 
+      or 0_startButton := FALSE; 1_wpPresent := TRUE; 2_fwLimit := FALSE; 3_bwLimit := TRUE; 4_openComplete := TRUE; 
+      or 0_startButton := FALSE; 1_wpPresent := TRUE; 2_fwLimit := FALSE; 3_bwLimit := FALSE; 4_openComplete := TRUE; 
+      or 0_startButton := FALSE; 1_wpPresent := TRUE; 2_fwLimit := TRUE; 3_bwLimit := FALSE; 4_openComplete := FALSE; 
+      or 0_startButton := FALSE; 1_wpPresent := FALSE; 2_fwLimit := TRUE; 3_bwLimit := FALSE; 4_openComplete := FALSE; 
+      or 0_startButton := FALSE; 1_wpPresent := FALSE; 2_fwLimit := TRUE; 3_bwLimit := FALSE; 4_openComplete := FALSE; 
+      or 0_startButton := FALSE; 1_wpPresent := FALSE; 2_fwLimit := TRUE; 3_bwLimit := FALSE; 4_openComplete := TRUE; 
+      or 0_startButton := FALSE; 1_wpPresent := FALSE; 2_fwLimit := FALSE; 3_bwLimit := FALSE; 4_openComplete := TRUE; 
+      or 0_startButton := FALSE; 1_wpPresent := FALSE; 2_fwLimit := FALSE; 3_bwLimit := TRUE; 4_openComplete := TRUE; 
+    end either;
+    plc_state := 1;
+  elsif plc_state = 1 then
+    if state = 0 /\ 0_startButton = TRUE /\ 1_wpPresent = FALSE /\ 2_fwLimit = FALSE /\ 3_bwLimit = TRUE /\ 4_openComplete = TRUE then
+      5_opLamp := TRUE;
+      state := 1;
+    elsif state = 1 /\ 0_startButton = FALSE /\ 1_wpPresent = TRUE /\ 2_fwLimit = FALSE /\ 3_bwLimit = TRUE /\ 4_openComplete = TRUE then
+      6_moveFw := TRUE;
+      state := 2;
+    elsif state = 2 /\ 0_startButton = FALSE /\ 1_wpPresent = TRUE /\ 2_fwLimit = TRUE /\ 3_bwLimit = FALSE /\ 4_openComplete = FALSE then
+      6_moveFw := FALSE;
+      8_pushFw := TRUE;
+      state := 3;
+    elsif state = 3 /\ 0_startButton = FALSE /\ 1_wpPresent = FALSE /\ 2_fwLimit = TRUE /\ 3_bwLimit = FALSE /\ 4_openComplete = FALSE then
+      8_pushFw := FALSE;
+      9_pushBw := TRUE;
+      state := 4;
+    elsif state = 4 /\ 0_startButton = FALSE /\ 1_wpPresent = FALSE /\ 2_fwLimit = TRUE /\ 3_bwLimit = FALSE /\ 4_openComplete = TRUE then
+      7_moveBw := TRUE;
+      9_pushBw := FALSE;
+      state := 5;
+    elsif state = 5 /\ 0_startButton = FALSE /\ 1_wpPresent = FALSE /\ 2_fwLimit = FALSE /\ 3_bwLimit = TRUE /\ 4_openComplete = TRUE then
+      5_opLamp := FALSE;
+      7_moveBw := FALSE;
+      state := 0;
+    end if;
+    plc_state := 2;
+  elsif plc_state = 2 then
+    0_startButton := FALSE;
+    1_wpPresent := FALSE;
+    2_fwLimit := FALSE;
+    3_bwLimit := FALSE;
+    4_openComplete := FALSE;
+    plc_state := 0;
+  end if;
+end while;
+end process
+
+end algorithm *)
+DollySpec == [] ~((6_moveFw = TRUE) /\ (7_moveBw = TRUE))
+ArmSpec == [] ~((8_pushFw = TRUE) /\ (9_pushBw = TRUE))
+ExtSpec == [] ((0_startButton = TRUE) ~> (6_moveFw = TRUE))
+=============================================================================

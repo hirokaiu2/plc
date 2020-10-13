@@ -1,0 +1,13 @@
+  { signal: [
+    { name: "in:0_startButton",   wave: 'lhl........' },
+    { name: "in:1_wpPresent",     wave: 'l..h..l....' },
+    { name: "in:2_fwLimit",       wave: 'l....h...l.' },
+    { name: "in:3_bwLimit",       wave: 'h...l.....h' },
+    { name: "in:4_openComplete",  wave: 'h....l..h..' },
+    { name: "out:5_opLamp",       wave: 'lh........l' },
+    { name: "out:6_moveFw",       wave: 'l..h.l.....' },
+    { name: "out:7_moveBw",       wave: 'l.......h.l' },
+    { name: "out:8_pushFw",       wave: 'l....h.l...' },
+    { name: "out:9_pushBw",       wave: 'l......hl..' },
+    ]
+  }

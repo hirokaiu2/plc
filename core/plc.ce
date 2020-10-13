@@ -1,0 +1,15 @@
+{ signal: [
+  { name: "0_startButton", wave: 'lh.lh' },
+  { name: "1_wpPresent", wave: 'l....' },
+  { name: "2_fwLimit", wave: 'l....' },
+  { name: "3_bwLimit", wave: 'lh.lh' },
+  { name: "4_openComplete", wave: 'lh.lh' },
+  { name: "5_opLamp", wave: 'l.h..' },
+  { name: "6_moveFw", wave: 'l....' },
+  { name: "7_moveBw", wave: 'l....' },
+  { name: "8_pushFw", wave: 'l....' },
+  { name: "9_pushBw", wave: 'l....' },
+  { name: "plc_state", wave: '44444', data: '0 1 2 0 1 ' },
+  { name: "state", wave: '4.4..', data: '0 1 ' },
+  ]
+}

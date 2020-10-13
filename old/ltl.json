@@ -1,0 +1,154 @@
+[{
+  "type": "ltl",
+  "message0": "LTL: %1 %2 %3 %4 %5",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "p",
+      "check": "Boolean"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "tf",
+      "options": [
+        [
+          "is true",
+          "T"
+        ],
+        [
+          "is false",
+          "F"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "qr",
+      "check": "ltl_sub"
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": "ltl",
+  "nextStatement": "ltl",
+  "colour": 20,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "between",
+  "message0": "Between %1 %2 and %3 %4",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "q",
+      "check": "Boolean"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "r",
+      "check": "Boolean"
+    }
+  ],
+  "inputsInline": true,
+  "output": "ltl_sub",
+  "colour": 20,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "before_after",
+  "message0": "%1 %2 %3",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "ba",
+      "options": [
+        [
+          "Before",
+          "b"
+        ],
+        [
+          "After",
+          "a"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "q",
+      "check": "Boolean"
+    }
+  ],
+  "inputsInline": true,
+  "output": "ltl_sub",
+  "colour": 20,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "after_until",
+  "message0": "After %1 %2 until %3 %4",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "p",
+      "check": "Boolean"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "q",
+      "check": "Boolean"
+    }
+  ],
+  "inputsInline": true,
+  "output": "ltl_sub",
+  "colour": 20,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "ltl_spec",
+  "message0": "LTL specifications: %1 %2",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "ltl",
+      "check": "ltl"
+    }
+  ],
+  "colour": 20,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "globally",
+  "message0": "Always",
+  "output": "ltl_sub",
+  "colour": 20,
+  "tooltip": "",
+  "helpUrl": ""
+}]

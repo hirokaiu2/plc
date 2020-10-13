@@ -1,0 +1,97 @@
+TLC2 Version 2.15 of Day Month 20?? (rev: eb3ff99)
+Running breadth-first search Model-Checking with fp 114 and seed 7743763134478098626 with 1 worker on 8 cores with 1820MB heap and 64MB offheap memory [pid: 3927] (Mac OS X 10.15.6 x86_64, Oracle Corporation 12.0.2 x86_64, MSBDiskFPSet, DiskStateQueue).
+Parsing file /Users/hirokaiu2/workspace/projects/plc/core/plc.tla
+Parsing file /private/var/folders/y0/pvb8vzns3z13m1m3g7pgk6840000gn/T/Naturals.tla
+Parsing file /private/var/folders/y0/pvb8vzns3z13m1m3g7pgk6840000gn/T/TLC.tla
+Parsing file /private/var/folders/y0/pvb8vzns3z13m1m3g7pgk6840000gn/T/Sequences.tla
+Parsing file /private/var/folders/y0/pvb8vzns3z13m1m3g7pgk6840000gn/T/FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module plc
+Starting... (2020-09-21 00:06:47)
+Implied-temporal checking--satisfiability problem has 1 branches.
+Computing initial states...
+Finished computing initial states: 1 distinct state generated at 2020-09-21 00:06:47.
+Progress(18) at 2020-09-21 00:06:47: 157 states generated, 96 distinct states found, 0 states left on queue.
+Checking temporal properties for the complete state space with 96 total distinct states at (2020-09-21 00:06:47)
+Error: Temporal properties were violated.
+
+Error: The following behavior constitutes a counter-example:
+
+State 1: <Initial predicate>
+/\ state = 0
+/\ 5_opLamp = FALSE
+/\ 3_bwLimit = FALSE
+/\ 2_fwLimit = FALSE
+/\ 1_wpPresent = FALSE
+/\ 4_openComplete = FALSE
+/\ 9_pushBw = FALSE
+/\ 7_moveBw = FALSE
+/\ 8_pushFw = FALSE
+/\ 0_startButton = FALSE
+/\ 6_moveFw = FALSE
+/\ plc_state = 0
+
+State 2: <plc line 89, col 8 to line 208, col 70 of module plc>
+/\ state = 0
+/\ 5_opLamp = FALSE
+/\ 3_bwLimit = TRUE
+/\ 2_fwLimit = FALSE
+/\ 1_wpPresent = FALSE
+/\ 4_openComplete = TRUE
+/\ 9_pushBw = FALSE
+/\ 7_moveBw = FALSE
+/\ 8_pushFw = FALSE
+/\ 0_startButton = TRUE
+/\ 6_moveFw = FALSE
+/\ plc_state = 1
+
+State 3: <plc line 89, col 8 to line 208, col 70 of module plc>
+/\ state = 1
+/\ 5_opLamp = TRUE
+/\ 3_bwLimit = TRUE
+/\ 2_fwLimit = FALSE
+/\ 1_wpPresent = FALSE
+/\ 4_openComplete = TRUE
+/\ 9_pushBw = FALSE
+/\ 7_moveBw = FALSE
+/\ 8_pushFw = FALSE
+/\ 0_startButton = TRUE
+/\ 6_moveFw = FALSE
+/\ plc_state = 2
+
+State 4: <plc line 89, col 8 to line 208, col 70 of module plc>
+/\ state = 1
+/\ 5_opLamp = TRUE
+/\ 3_bwLimit = FALSE
+/\ 2_fwLimit = FALSE
+/\ 1_wpPresent = FALSE
+/\ 4_openComplete = FALSE
+/\ 9_pushBw = FALSE
+/\ 7_moveBw = FALSE
+/\ 8_pushFw = FALSE
+/\ 0_startButton = FALSE
+/\ 6_moveFw = FALSE
+/\ plc_state = 0
+
+State 5: <plc line 89, col 8 to line 208, col 70 of module plc>
+/\ state = 1
+/\ 5_opLamp = TRUE
+/\ 3_bwLimit = TRUE
+/\ 2_fwLimit = FALSE
+/\ 1_wpPresent = FALSE
+/\ 4_openComplete = TRUE
+/\ 9_pushBw = FALSE
+/\ 7_moveBw = FALSE
+/\ 8_pushFw = FALSE
+/\ 0_startButton = TRUE
+/\ 6_moveFw = FALSE
+/\ plc_state = 1
+
+Back to state 3: <plc line 89, col 8 to line 208, col 70 of module plc>
+
+Finished checking temporal properties in 00s at 2020-09-21 00:06:47
+157 states generated, 96 distinct states found, 0 states left on queue.
+Finished in 00s at (2020-09-21 00:06:47)

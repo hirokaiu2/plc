@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PLC program verification demo</title>
+
+  <!-- jQuert -->
+  <script src="jquery-3.5.1.min.js"></script>
+  
+  <!-- WaveDrom libraries -->
+  <script src="wavedorm/js/default.js"></script>
+  <script src="wavedorm/js/wavedrom.min.js"></script>
+
+  <!-- Blockly libraries -->
+  <script src="blockly/js/blockly_compressed.js"></script>
+  <script src="blockly/js/blocks_compressed.js"></script>
+  <script src="blockly/js/javascript_compressed.js"></script>
+  <script src="blockly/msg/js/en.js"></script>
+  
+  <!-- Blockly custom block -->
+  <script src="ltl.js"></script>
+  <script src="ltl_style.js"></script>
+
+  <script>
+    function updateWaveImage(val) {
+      wave = document.getElementById('wave');
+      wave.innerHTML = '<script type="WaveDrom">' + val + '<\/script>';
+      WaveDrom.ProcessAll();
+    }
+  </script>
+
+  <script>
+    function generateModel() {
+      /* Send request for model checking */
+      var waveJson = document.getElementById('wave-json').value;
+
+      $.ajax({
+        type: 'POST',
+        url: 'http://localhost:3000/',
+        //dataType: 'json',
+        //data: JSON.stringify(data),
+        data: waveJson,
+        success: function(res) {
+          console.log('Success');
+          //console.log(JSON.stringify(data));
+          //console.log(res);
+          waveCe = document.getElementById('wave-ce');
+          waveCe.innerHTML = '<script type="WaveDrom">' + res + '<\/script>';
+          WaveDrom.ProcessAll();
+        },
+        error: function(jqXHR, textStatus, err) {
+          console.log('Error:', textStatus);
+        }
+      });
+    }
+  </script>  
+</head>
+
+<body onload="WaveDrom.ProcessAll()">
+
+<!-- WaveDrom editor -->
+<h2>1. Edit timing diagram</h2>
+<textarea id="wave-json" style="height: 200px; width:100%" onchange="updateWaveImage(this.value)">
+  { signal: [
+    { name: "in:0_startButton",   wave: 'lhl........' },
+    { name: "in:1_wpPresent",     wave: 'l..h..l....' },
+    { name: "in:2_fwLimit",       wave: 'l....h...l.' },
+    { name: "in:3_bwLimit",       wave: 'h...l.....h' },
+    { name: "in:4_openComplete",  wave: 'h....l..h..' },
+    { name: "out:5_opLamp",       wave: 'lh........l' },
+    { name: "out:6_moveFw",       wave: 'l..h.l.....' },
+    { name: "out:7_moveBw",       wave: 'l.......h.l' },
+    { name: "out:8_pushFw",       wave: 'l....h.l...' },
+    { name: "out:9_pushBw",       wave: 'l......hl..' },
+    ]
+  }
+</textarea>
+
+<div style="height: 10px;"></div>
+
+<!-- WaveDrom image -->
+<div id="wave" style="width: 100%; overflow: auto;">
+<script type="WaveDrom">
+  { signal: [
+    { name: "in:0_startButton",   wave: 'lhl........' },
+    { name: "in:1_wpPresent",     wave: 'l..h..l....' },
+    { name: "in:2_fwLimit",       wave: 'l....h...l.' },
+    { name: "in:3_bwLimit",       wave: 'h...l.....h' },
+    { name: "in:4_openComplete",  wave: 'h....l..h..' },
+    { name: "out:5_opLamp",       wave: 'lh........l' },
+    { name: "out:6_moveFw",       wave: 'l..h.l.....' },
+    { name: "out:7_moveBw",       wave: 'l.......h.l' },
+    { name: "out:8_pushFw",       wave: 'l....h.l...' },
+    { name: "out:9_pushBw",       wave: 'l......hl..' },
+    ]
+  }
+</script>
+</div>
+
+<!-- Blockly workspace -->
+<h2>2. Define LTL specification</h2>
+<div id="blocklyDiv" style="height: 300px; width: 100%;"></div>
+
+<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+  <category name="Properties" colour="#5ba55b">
+    <block type="properties"></block>
+    <block type="universality"></block>
+    <block type="existence"></block>
+    <block type="response"></block>
+  </category>
+  <category name="Logic" colour="#5b80a5">
+    <block type="controls_if"></block>
+    <block type="logic_compare">
+      <field name="OP">EQ</field>
+    </block>
+    <block type="logic_operation">
+      <field name="OP">AND</field>
+    </block>
+    <block type="logic_negate"></block>
+    <block type="logic_boolean">
+      <field name="BOOL">TRUE</field>
+    </block>
+    <block type="logic_null"></block>
+    <block type="logic_ternary"></block>
+  </category>
+  <sep></sep>
+  <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
+</xml>
+
+<script>
+  var toolbox = document.getElementById("toolbox");
+
+  var options = {
+      toolbox : toolbox,
+      collapse : true,
+      comments : true,
+      disable : true,
+      maxBlocks : Infinity,
+      trashcan : true,
+      horizontalLayout : false,
+      toolboxPosition : 'start',
+      css : true,
+      media : 'https://blockly-demo.appspot.com/static/media/',
+      rtl : false,
+      scrollbars : true,
+      sounds : true,
+      oneBasedIndex : true
+  };
+
+  /* Inject custom workspace */
+  var workspace = Blockly.inject("blocklyDiv", options);
+
+  function generateLTL() {
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    code = code.replace(/^\s*[\r\n]/gm, '');
+    code = code.replace(/^var\s(.+)[\r\n]/gm, '');
+    document.getElementById("ltl").value = code;
+  }
+</script>
+
+<!-- LTL property generation -->
+<p><button onclick="generateLTL()">Generate LTL</button></p>
+<textarea id="ltl" style="height: 100px; width: 100%;"></textarea>
+
+<!-- PLC model checking -->
+<h2>3. Verify the specification</h2>
+<p><button onclick="generateModel()">Verify</button></p>
+
+<!-- WaveDrom counter-example image -->
+<div id="wave-ce" style="width: 100%; overflow: auto;">
+</div>  
+
+</body>
+</html>

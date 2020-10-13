@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PLC program verification demo</title>
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="wavedorm/css/codemirror.css">
+  <link rel="stylesheet" href="wavedorm/css/dialog.css">
+  <link rel="stylesheet" href="wavedorm/css/main.css">
+  <link rel="manifest" href="wavedorm/manifest.json">
+
+  <!-- Blockly libraries
+  <script src="blockly/js/blockly_compressed.js"></script>
+  <script src="blockly/js/blocks_compressed.js"></script>
+  <script src="blockly/js/javascript_compressed.js"></script>
+  <script src="blockly/msg/js/en.js"></script> -->
+  
+  <!-- Blockly custom block definition
+  <script src="ltl.js"></script>
+  <script src="ltl_style.js"></script> -->
+
+  <!-- WaveDrom libraries -->
+  <script src="wavedorm/js/codemirror-compressed.js"></script>
+  <script src="wavedorm/js/lodash.min.js"></script>
+  <script src="wavedorm/js/default.js"></script>
+  <script src="wavedorm/js/dark.js"></script>
+  <script src="wavedorm/js/narrow.js"></script>
+  <script src="wavedorm/js/lowkey.js"></script>
+  <script src="wavedorm/js/wavedrom.min.js"></script>
+  <script src="wavedorm/js/editor.js"></script>
+
+  <!--
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+    #blocklyDiv {
+      height: 600px;
+      width: 1200px;
+    }
+  </style>
+  -->
+  
+</head>
+<!--<body onload="WaveDrom.ProcessAll()">
+  <script type="WaveDrom">
+    { signal : [
+      { name: "clk",  wave: "p......" },
+      { name: "bus",  wave: "x.34.5x",   data: "head body tail" },
+      { name: "wire", wave: "0.1..0." },
+    ]}
+  </script>-->
+<body onload="WaveDrom.editorInit()">
+
+<!-- WaveDrom workspace -->
+<div id="content">
+  <div id="SVG"><div id="SVGScroll"><div id="WaveDrom_Display_0"></div></div></div>
+  <div id="TXT"><textarea id="InputJSON_0" rows="15"></textarea></div>
+</div>
+<!--<div style="height: 200px; width: 600px;"></div>-->
+<script src="wavedorm/js/init.js"></script>
+
+<!-- Blockly workspace
+<div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+
+<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+  <category name="LTL" colour="#a5745b">
+    <block type="ltl_spec"></block>
+    <block type="ltl">
+      <field name="tf">T</field>
+    </block>
+    <block type="globally"></block>
+    <block type="between"></block>
+    <block type="before_after">
+      <field name="ba">b</field>
+    </block>
+    <block type="after_until"></block>
+  </category>
+  <category name="Logic" colour="#5b80a5">
+    <block type="logic_compare">
+      <field name="OP">EQ</field>
+    </block>
+    <block type="logic_operation">
+      <field name="OP">AND</field>
+    </block>
+    <block type="logic_negate"></block>
+    <block type="logic_boolean">
+      <field name="BOOL">TRUE</field>
+    </block>
+  </category>
+  <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
+  <sep></sep>
+</xml>
+
+<script>
+  var toolbox = document.getElementById("toolbox");
+
+  var options = {
+      toolbox : toolbox,
+      collapse : true,
+      comments : true,
+      disable : true,
+      maxBlocks : Infinity,
+      trashcan : true,
+      horizontalLayout : false,
+      toolboxPosition : 'start',
+      css : true,
+      media : 'https://blockly-demo.appspot.com/static/media/',
+      rtl : false,
+      scrollbars : true,
+      sounds : true,
+      oneBasedIndex : true
+  };
+
+  /* Inject custom workspace */
+  /* var workspace = Blockly.inject("blocklyDiv", options); */
+
+  function generateLTL() {
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
+      code = code.replace(/^\s*[\r\n]/gm, '');
+      code = code.replace(/^var\s(.+)[\r\n]/gm, '');
+      document.getElementById("ltl").value = code;
+  }
+</script>
+
+<p><button onclick="generateLTL()">Generate LTL</button></p>
+<textarea id="ltl" rows="4" cols="95"></textarea> -->
+
+</body>
+</html>
